@@ -4,12 +4,12 @@
 
   <div id="gardens">
     <% @gardens.each do |garden| %>
-      <%= render garden %>
-      <p>
-        <%= link_to "Show this garden", garden %>
-      </p>
+      <%# Notice the link_to block that contains the garden partial! %>
+      <%= link_to garden do %>
+        <%= render garden %>
+      <% end %>
+
     <% end %>
   </div>
 
-  <%= link_to "New garden", new_garden_path %>
 </div>

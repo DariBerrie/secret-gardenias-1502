@@ -19,10 +19,20 @@ garden.save!
 
 puts "#{garden.name} created!"
 
-plant_attributes = {
-  name: "Monstera",
+puts "Creating plants..."
+plants_attributes = [
+  { name: "Monstera",
   image_url:"https://images.ctfassets.net/b85ozb2q358o/9a1cf0f586cf198d20ac48c219d74e7e1fdecf991436b8c332f204ceab8c2346/84e012be6561dc46b5a00e32efe2e969/image.png",
-  garden: garden
-}
+  garden: garden },
+  { name: "Sunflower",
+    image_url:"https://hips.hearstapps.com/hmg-prod/images/sunflowers-63fe51093f04d.jpg?crop=0.888888888888889xw:1xh;center,top&resize=1200:*",
+    garden: garden },
+  { name: "Bonsai",
+    image_url:"https://d1mv2b9v99cq0i.cloudfront.net/eyJidWNrZXQiOiJ3ZWItbmluamEtaW1hZ2VzIiwia2V5Ijoic3RvbmVhbmR3YXRlclwvY29udGVudC1pbWFnZVwvQmxvZyBDb3ZlcnMgZm9yIFNXVyAoNSkuanBnIiwiZWRpdHMiOnsicmVzaXplIjp7IndpZHRoIjozMDAwLCJoZWlnaHQiOjIwMDAsImZpdCI6Imluc2lkZSJ9fSwidmVyc2lvbiI6IiJ9",
+    garden: garden }
+]
 
-plant = Plant.create!(plant_attributes)
+plants_attributes.each do |attr|
+  plant = Plant.create!(attr)
+  puts "#{plant.name} created!"
+end
