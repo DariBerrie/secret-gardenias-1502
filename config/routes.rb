@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :gardens do
+
+  # %i[index show] == [:index, :show]
+  resources :gardens, only: %i[index show] do
     resources :plants, only: [:create, :destroy] 
   end
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

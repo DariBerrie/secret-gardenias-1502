@@ -13,10 +13,18 @@
  *= require_tree .
  *= require_self
  */
+
+ .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+ }
  .banner {
   background-size: cover;
   background-position: center;
-  padding: 150px 0;
+  padding: 150px 0px;
+  width: 100vw;
 }
 
 .banner h1 {
@@ -34,6 +42,10 @@
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
+.plants-container {
+  display: flex;
+  flex-direction: row;
+}
 .plant-card {
   width: 300px;
   height: 250px;
@@ -41,9 +53,12 @@
   padding: 16px;
   margin: 16px;
   color:white;
+  background-size: cover;
 }
 
-.form {
-  margin: 30px;
-  width: 800px;
+.plant-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 500px;
 }

@@ -1,37 +1,38 @@
 <p style="color: green"><%= notice %></p>
+<div class="container">
+  <%# Rendering _garden partial with garden instance variable %>
+  <%= render @garden %>
 
-<%= render @garden %>
-<% @plants.each  do |plant|%>
-  <div class="plant-card" 
-    style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= plant.image_url %>');">
-    <div class="container">
-      <h1><%= plant.name %></h1>
-    </div>
-     <%= link_to garden_plant_path(@garden, plant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, class: "card-remove-link", style: "color: white;" do %>
-          🗑️
+  <%# Show @garden's plants  %>
+  <div class="plants-container">
+    <% @plants.each  do |plant|%>
+      <div class="plant-card" 
+        style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= plant.image_url %>');">
+        <h1><%= plant.name %></h1>
+
+        <%# Delete plant %>
+        <%= link_to garden_plant_path(@garden, plant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, style: "color: white;" do %>
+          Delete ❌
         <% end %>
+      </div>
+    <% end %>
   </div>
-<% end %>
 
-<div class="form">
-  <%= simple_form_for([@garden, @plant]) do |f| %>
-    <%= f.error_notification %>
-    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+  <div class="plant-form">
+    <%= simple_form_for([@garden, @plant]) do |f| %>
+      <%= f.error_notification %>
+      <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
 
-    <div class="form-inputs">
-      <%= f.input :name %>
-      <%= f.input :image_url %>
-    </div>
+      <div class="form-inputs">
+        <%= f.input :name, placeholder: "Your plant baby's name" %>
+        <%= f.input :image_url, label: "Image", placeholder: "https://www.image_url.com" %>
+      </div>
 
-    <div class="form-actions">
-      <%= f.button :submit, "Add Plant" %>
-    </div>
-  <% end %>
-</div>
-
-<div>
-  <%= link_to "Edit this garden", edit_garden_path(@garden) %> |
-  <%= link_to "Back to gardens", gardens_path %>
-
-  <%= button_to "Destroy this garden", @garden, method: :delete %>
+      <div class="form-actions">
+        <%= f.button :submit, "Add Plant", class: "btn-success" %>
+      </div>
+    <% end %>
+  </div>
+  
+  </div>
 </div>

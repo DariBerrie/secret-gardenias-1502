@@ -2,7 +2,7 @@ class PlantsController < ApplicationController
   def create
     garden = Garden.find(params[:garden_id])
     @plant = Plant.new(plant_params)
-    @plant.garden = garden # explicit assignment (not part of plant params)
+    @plant.garden = garden # Done this way for security reasons, preventing mass assignment vulnerabilities
 
     if @plant.save
       redirect_to garden, notice: "#{@plant.name} was successfully created!"
@@ -23,5 +23,7 @@ class PlantsController < ApplicationController
 
   def plant_params
     params.require(:plant).permit(:name, :image_url) 
+    # Below is not recommended for reasons relating to mass assignment vulnerabilities mentioned above.
+    # params.require(:plant).permit(:name, :image_url).merge(garden_id: params[:garden_id])
   end
 end
