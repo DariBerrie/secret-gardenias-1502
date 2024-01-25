@@ -2,12 +2,14 @@ Rails.application.routes.draw do
 
   # %i[index show] == [:index, :show]
   resources :gardens, only: %i[index show] do
-    resources :plants, only: [:create, :destroy] 
+    resources :plants, only: :create
   end
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
+  # Previously, we had #destroy included within our nested plants resources, but
+  # we can moved this to its own resources because the destroy method will already be able to
+  # identify/query for the specific plant to destroy thanks to its ID.
+  resources :plants, only: :destroy
+  
   get "up" => "rails/health#show", as: :rails_health_check
 
   # Defines the root path route ("/")

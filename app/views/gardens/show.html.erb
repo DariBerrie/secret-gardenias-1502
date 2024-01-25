@@ -11,7 +11,9 @@
         <h1><%= plant.name %></h1>
 
         <%# Delete plant %>
-        <%= link_to garden_plant_path(@garden, plant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, style: "color: white;" do %>
+        <%# Originally, we had garden_plant_path(@garden, plant) because we had nested plant's destroy method in garden in routes.rb  
+            This is not necessary because we only need the plant's id. Revisit routes.rb to see the change. %>
+        <%= link_to plant_path(plant), data: {turbo_method: :delete, turbo_confirm: "Are you sure?"}, style: "color: white;" do %>
           Delete ❌
         <% end %>
       </div>
@@ -33,6 +35,6 @@
       </div>
     <% end %>
   </div>
-  
+
   </div>
 </div>
